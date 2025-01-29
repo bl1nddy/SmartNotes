@@ -8,18 +8,18 @@ import json
 app = QApplication([])
 
 
-#параметры окна приложения
+
 notes_win = QWidget()
 notes_win.setWindowTitle('Умные заметки')
 notes_win.resize(900, 600)
 
 
-#виджеты окна приложения
+
 list_notes = QListWidget()
 list_notes_label = QLabel('Список заметок')
 
 
-button_note_create = QPushButton('Создать заметку') #появляется окно с полем "Введите имя заметки"
+button_note_create = QPushButton('Создать заметку') 
 button_note_del = QPushButton('Удалить заметку')
 button_note_save = QPushButton('Сохранить заметку')
 
@@ -34,7 +34,6 @@ list_tags = QListWidget()
 list_tags_label = QLabel('Список тегов')
 
 
-#расположение виджетов по лэйаутам
 layout_notes = QHBoxLayout()
 col_1 = QVBoxLayout()
 col_1.addWidget(field_text)
@@ -81,7 +80,6 @@ def add_note():
 
 
 def show_note():
-    #получаем текст из заметки с выделенным названием и отображаем его в поле редактирования
     key = list_notes.selectedItems()[0].text()
     print(key)
     field_text.setText(notes[key]["текст"])
@@ -149,7 +147,7 @@ def search_tag():
     tag = field_tag.text()
     if button_tag_search.text() == "Искать заметки по тегу" and tag:
         print(tag)
-        notes_filtered = {} #тут будут заметки с выделенным тегом
+        notes_filtered = {} 
         for note in notes:
             if tag in notes[note]["теги"]: 
                 notes_filtered[note]=notes[note]
@@ -169,7 +167,6 @@ def search_tag():
         pass
     
 
-#подключение обработки событий
 button_note_create.clicked.connect(add_note)
 list_notes.itemClicked.connect(show_note)
 button_note_save.clicked.connect(save_note)
@@ -179,7 +176,6 @@ button_tag_del.clicked.connect(del_tag)
 button_tag_search.clicked.connect(search_tag)
 
 
-#запуск приложения 
 notes_win.show()
 
 
